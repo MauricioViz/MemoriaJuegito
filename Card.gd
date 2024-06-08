@@ -6,7 +6,6 @@ var value # valor de carta entre 1 a 3
 var face # textura parte frontal de la carta
 var back # textura parte trasera de la carta
 
-# Definimos parámetros del constructor
 func _init(s, v):
 	suit = s
 	value = v
@@ -32,9 +31,11 @@ func _init(s, v):
 		texture_normal = face
 	else:
 		print("Error: La variable 'face' no es una textura válida.")
-	
 	pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass  # Reemplazar con el cuerpo de la función si es necesario
+	set_h_size_flags(3)
+	set_v_size_flags(3)
+	set_stretch_mode(TextureButton.STRETCH_KEEP_ASPECT_CENTERED)
+	pass
