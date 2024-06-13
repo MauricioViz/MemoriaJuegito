@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://br62t2jn44gsn"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_m3bus"]
+[ext_resource type="PackedScene" uid="uid://bsiuvl1ejeja5" path="res://Scenes/hud.tscn" id="2_y5eqg"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m3bus")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.324535, 0.657052, 0.465865, 1)
+
+[node name="Grid" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 130.0
+offset_top = 244.0
+offset_right = -122.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 7
+
+[node name="HUD" parent="." instance=ExtResource("2_y5eqg")]
+layout_mode = 1
+offset_left = 0.0
+offset_right = 0.0

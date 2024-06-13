@@ -1,0 +1,136 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsiuvl1ejeja5"]
+
+[ext_resource type="FontFile" uid="uid://bf6lyy82sbyqx" path="res://Assets/fonts/Nunito-Bold.ttf" id="1_d4umo"]
+[ext_resource type="Texture2D" uid="uid://dakd8lc87c7wn" path="res://Assets/ui/pause.png" id="2_28wd2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2absd"]
+bg_color = Color(0, 0.129412, 0.301961, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="Theme" id="Theme_v363m"]
+Panel/styles/panel = SubResource("StyleBoxFlat_2absd")
+
+[sub_resource type="FontVariation" id="FontVariation_f5uxl"]
+base_font = ExtResource("1_d4umo")
+
+[sub_resource type="FontVariation" id="FontVariation_lm32i"]
+base_font = ExtResource("1_d4umo")
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_v363m")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(0, 0.729412, 0.121569, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_right = -40.0
+offset_bottom = -580.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sections" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SectionScore" type="VBoxContainer" parent="Panel/Sections"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/Sections/SectionScore"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("FontVariation_f5uxl")
+theme_override_font_sizes/font_size = 24
+text = "SCORE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="Panel/Sections/SectionScore"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("FontVariation_lm32i")
+theme_override_font_sizes/font_size = 80
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SectionTimer" type="VBoxContainer" parent="Panel/Sections"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/Sections/SectionTimer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("FontVariation_f5uxl")
+theme_override_font_sizes/font_size = 24
+text = "TIME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seconds" type="Label" parent="Panel/Sections/SectionTimer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("FontVariation_lm32i")
+theme_override_font_sizes/font_size = 80
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SectionPairs" type="VBoxContainer" parent="Panel/Sections"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/Sections/SectionPairs"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("FontVariation_f5uxl")
+theme_override_font_sizes/font_size = 24
+text = "PAIRS FLIPPED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Moves" type="Label" parent="Panel/Sections/SectionPairs"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("FontVariation_lm32i")
+theme_override_font_sizes/font_size = 80
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SectionButtons" type="VBoxContainer" parent="Panel/Sections"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="PauseButton" type="TextureButton" parent="Panel/Sections/SectionButtons"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("2_28wd2")
+stretch_mode = 5
+flip_h = true
+flip_v = true
