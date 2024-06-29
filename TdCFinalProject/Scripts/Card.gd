@@ -27,7 +27,15 @@ func _init(v, t):
 
 func _pressed():
 	var gameNode = get_node('/root/Game')
-	gameNode.chooseCard(self)
+	
+	if ControlDificultad.cardA == null:
+		gameNode.eleccion_primera_carta(self)
+		pass
+		
+	elif ControlDificultad.cardB == null:
+		gameNode.eleccion_segunda_carta(self)
+		pass
+	
 	#if ControlDificultad.card1 == null:
 		#ControlDificultad.card1 = self 
 		#self.flip()

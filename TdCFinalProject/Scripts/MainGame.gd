@@ -13,21 +13,21 @@ var flipTimer = Timer.new()
 var score = 0
 var pila = Pila.new()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	print(ControlDificultad.dificultad)
-	fillDeck()
-	dealDeck()
-	setupTimers()
-	pass # Replace with function body.
-	
 enum State{
 	INICIO_JUEGO, AÑADIR_CARTA, DESORDENAR_CARTAS,
 	ELECCION_PRIMERA_CARTA, VOLTEAR_PRIMERA_CARTA,
 	ELECCION_SEGUNDA_CARTA, VOLTEAR_SEGUNDA_CARTA,
 	PROCESO_COMPARACION, DESACTIVAR_CARTAS, VOLTEAR_AMBAS_CARTAS,
 }
-var estado_actual = State.INICIO_JUEGO
+var estado_actual = null
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	randomize()
+	setupTimers()
+	cambiar_estado(State.INICIO_JUEGO)
+	pass # Replace with function body.
+	
 	
 func setupTimers():
 	flipTimer.connect("timeout", Callable(self, "turnOverCards"))
@@ -37,6 +37,108 @@ func setupTimers():
 	matchTimer.connect("timeout", Callable(self, "matchCardsAndScore"))
 	matchTimer.set_one_shot(true)
 	add_child(matchTimer)
+	pass
+	
+func cambiar_estado(nuevo_estado):
+	estado_actual = nuevo_estado
+	match estado_actual:
+		State.INICIO_JUEGO:
+			iniciar_juego()
+		State.AÑADIR_CARTA:
+			añadir_carta()
+		State.DESORDENAR_CARTAS:
+			desordenar_cartas()
+		State.ELECCION_PRIMERA_CARTA:
+			eleccion_primera_carta(card1)
+		State.VOLTEAR_PRIMERA_CARTA:
+			voltear_primera_carta(card1)
+		State.ELECCION_SEGUNDA_CARTA:
+			eleccion_segunda_carta(card2)
+		State.VOLTEAR_SEGUNDA_CARTA:
+			voltear_segunda_carta(card2)
+		State.PROCESO_COMPARACION:
+			proceso_comparacion()
+		State.DESACTIVAR_CARTAS:
+			desactivar_cartas()
+		State.VOLTEAR_AMBAS_CARTAS:
+			voltear_ambas_cartas()
+			
+func iniciar_juego():
+	print("Inicio juego")
+	cambiar_estado(State.AÑADIR_CARTA)
+	pass
+	
+func añadir_carta():
+	print("Añadir carta")
+	fillDeck()
+	cambiar_estado(State.DESORDENAR_CARTAS)
+	pass
+	
+func desordenar_cartas():
+	print("Repartiendo y desordenando cartas")
+	dealDeck()
+	cambiar_estado(State.ELECCION_PRIMERA_CARTA)
+	
+	pass
+	
+func eleccion_primera_carta(card):
+	print("Eleccion Primera Carta")
+	ControlDificultad.cardA = card
+	if ControlDificultad.cardA != null:
+		card1 = card
+		if card1 != null:
+			cambiar_estado(State.VOLTEAR_PRIMERA_CARTA)
+		pass
+		
+	#Esta función sirve para retener el programa de tomar alguna accion hasta que el jugador seleccione.
+	#Esto debido a que la interaccion directa con la carta pertenece a la clase Card.gd.
+	pass
+
+func voltear_primera_carta(card):
+	print("Volteando primera carta")
+	card.flip()
+	card.set_disabled(true)
+	cambiar_estado(State.ELECCION_SEGUNDA_CARTA)
+	pass
+	
+func eleccion_segunda_carta(card):
+	print("Eleccion Segunda Carta")
+	ControlDificultad.cardB = card
+	if ControlDificultad.cardB != null:
+		card2 = card
+		if card2 != null:
+			cambiar_estado(State.VOLTEAR_SEGUNDA_CARTA)
+			pass
+	
+	#Esta función sirve para retener el programa de tomar alguna accion hasta que el jugador seleccione.
+	#Esto debido a que la interaccion directa con la carta pertenece a la clase Card.gd.
+	pass
+	
+func voltear_segunda_carta(card):
+	print("Volteando segunda carta")
+	card.flip()
+	card.set_disabled(true)
+	cambiar_estado(State.PROCESO_COMPARACION)
+	pass
+	
+func proceso_comparacion():
+	print("Comparando")
+	if card1.value == card2.value:
+		cambiar_estado(State.DESACTIVAR_CARTAS)
+		
+	else:
+		cambiar_estado(State.VOLTEAR_AMBAS_CARTAS)
+
+	pass
+	
+func desactivar_cartas():
+	print("Iguales, desactivando")
+	matchTimer.start(1)
+	pass
+	
+func voltear_ambas_cartas():
+	print("Distintos, volteando")
+	flipTimer.start(1)
 	pass
 
 func fillDeck():
@@ -93,6 +195,9 @@ func matchCardsAndScore():
 	#card1 y card2 se regresan a null para poder volver a seleccionar 2 cartas
 	card1 = null
 	card2 = null
+	ControlDificultad.cardA = null
+	ControlDificultad.cardB = null
+	
 	pass
 
 func turnOverCards():
@@ -104,6 +209,8 @@ func turnOverCards():
 	#card1 y card2 se regresan a null para poder volver a seleccionar 2 cartas
 	card1 = null
 	card2 = null 
+	ControlDificultad.cardA = null
+	ControlDificultad.cardB = null
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
