@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://dehv513gvow5h"]
+
+[ext_resource type="Script" path="res://Scripts/MenuScript.gd" id="1_bh1ux"]
+[ext_resource type="Texture2D" uid="uid://hqvwkvfj7lor" path="res://MenuBg.jpg" id="1_umwsk"]
+[ext_resource type="FontFile" uid="uid://bty3v4xfd841k" path="res://04b_30/04B_30__.TTF" id="2_1qdft"]
+
+[node name="MenuP" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bh1ux")
+
+[node name="MenuBg" type="Sprite2D" parent="."]
+position = Vector2(630, 361)
+scale = Vector2(0.998888, 1.00204)
+texture = ExtResource("1_umwsk")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 146.0
+offset_top = 188.0
+offset_right = 1171.0
+offset_bottom = 314.0
+theme_override_fonts/font = ExtResource("2_1qdft")
+theme_override_font_sizes/font_size = 120
+text = "Cards Game"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 378.0
+offset_right = 911.0
+offset_bottom = 583.0
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.0980392, 0.121569, 0.729412, 1)
+theme_override_colors/font_hover_color = Color(0.0941176, 0.588235, 0.960784, 1)
+theme_override_fonts/font = ExtResource("2_1qdft")
+theme_override_font_sizes/font_size = 60
+text = "Jugar"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.0980392, 0.121569, 0.729412, 1)
+theme_override_colors/font_hover_color = Color(0.0941176, 0.588235, 0.960784, 1)
+theme_override_fonts/font = ExtResource("2_1qdft")
+theme_override_font_sizes/font_size = 60
+text = "Salir"
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
