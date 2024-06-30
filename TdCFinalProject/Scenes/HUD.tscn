@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://6e5bj1wctfip"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eih8m"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0)
+border_width_bottom = 10
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="Theme" id="Theme_nt16c"]
+Panel/styles/panel = SubResource("StyleBoxFlat_eih8m")
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_nt16c")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 1180.0
+offset_bottom = 150.0
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+
+[node name="Sections" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

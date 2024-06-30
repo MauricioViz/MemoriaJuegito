@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6e6hkoon3jho"]
+[gd_scene load_steps=3 format=3 uid="uid://c6e6hkoon3jho"]
 
 [ext_resource type="Script" path="res://Scripts/MainGame.gd" id="1_wwsd8"]
+[ext_resource type="PackedScene" uid="uid://6e5bj1wctfip" path="res://Scenes/HUD.tscn" id="2_slwuw"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -27,3 +28,6 @@ offset_top = 250.0
 offset_right = 1228.0
 offset_bottom = 663.0
 columns = 5
+
+[node name="HUD" parent="." instance=ExtResource("2_slwuw")]
+layout_mode = 1

@@ -83,6 +83,12 @@ func desordenar_cartas():
 	
 func eleccion_primera_carta(card):
 	print("Eleccion Primera Carta")
+	print(pila.size())
+	
+	if pila.is_empty():
+		print("Pila vacia")
+		pass
+	
 	ControlDificultad.cardA = card
 	if ControlDificultad.cardA != null:
 		card1 = card
@@ -134,11 +140,13 @@ func proceso_comparacion():
 func desactivar_cartas():
 	print("Iguales, desactivando")
 	matchTimer.start(1)
+	#cambiar_estado(State.ELECCION_PRIMERA_CARTA)
 	pass
 	
 func voltear_ambas_cartas():
 	print("Distintos, volteando")
 	flipTimer.start(1)
+	#cambiar_estado(State.ELECCION_PRIMERA_CARTA)
 	pass
 
 func fillDeck():
@@ -146,16 +154,26 @@ func fillDeck():
 	if ControlDificultad.dificultad == 1:
 		for t in [1, 2]:
 			for v in range(1, 6):
+				if t == 2:
+					print("Añadiendo par")
+					pila.push("Par")
 				deck.append(Card.new(v,t))
+	pass
 	#Si se eligio dificultad media
 	if ControlDificultad.dificultad == 2:
 		for t in [1, 2]:
 			for v in range(1, 11):
+				if t == 2:
+					print("Añadiendo par")
+					pila.push("Par")
 				deck.append(Card.new(v,t))
 	#Si se eligio dificultad dificil
 	if ControlDificultad.dificultad == 3:
 		for t in [1, 2]:
 			for v in range(1, 16):
+				if t == 2:
+					print("Añadiendo par")
+					pila.push("Par")
 				deck.append(Card.new(v,t))
 	
 	pass
@@ -198,6 +216,8 @@ func matchCardsAndScore():
 	ControlDificultad.cardA = null
 	ControlDificultad.cardB = null
 	
+	pila.pop()
+	cambiar_estado(State.ELECCION_PRIMERA_CARTA)
 	pass
 
 func turnOverCards():
@@ -211,6 +231,7 @@ func turnOverCards():
 	card2 = null 
 	ControlDificultad.cardA = null
 	ControlDificultad.cardB = null
+	cambiar_estado(State.ELECCION_PRIMERA_CARTA)
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
